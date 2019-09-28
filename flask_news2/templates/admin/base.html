@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>新闻管理系统</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
+    </head>
+    <body>
+        <div class="container">
+
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">新闻管理后台</a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ url_for('.news_detail') }}">新闻<span class="sr-only">(current)</span></a></li>
+                            <li><a href="#">轮播图</a></li>
+                            <li><a href="{{ url_for('.manager_user') }}">管理员</a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{{ url_for('index.home') }}">前台首页</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true"
+                                   aria-expanded="false">{{ session.username }}<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ url_for('.logout') }}">退出</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{{ url_for('.changePassword') }}">修改密码</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item active">后台首页</a>
+                        <a href="#" class="list-group-item">新闻管理</a>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    {% with messages = get_flashed_messages(with_categories = true) %}
+                        {% for category, message in messages %}
+                            <div class="alert {% if category=='error' %} alert-danger {% else %} alert-success {% endif %} alert-dismissible"
+                                 role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;
+                        </span>
+                                </button>
+                                <strong>提示:</strong>{{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endwith %}
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="{{ url_for('static', filename='js/jquery.1.10.2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
+    {% block otherjs %}
+    {% endblock %}
+</html>

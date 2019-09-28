@@ -1,0 +1,139 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+    <form class="form-horizontal" action="{{ url_for('admin.news_add') }}" method="post" novalidate>
+        <div class="form-group {% if form.title.errors %} has-error {% endif %}">
+            <label class="control-label col-md-2">
+                {{ form.title.label }}
+            </label>
+            <div class="col-md-7">
+                {{ form.title }}
+            </div>
+            <div class="col-md-3">
+                {% for error in form.title.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="form-group {% if form.content.errors %} has-error {% endif %}">
+                <label class="control-label col-md-2">
+                    {{ form.content.label }}
+                </label>
+                <div class="col-md-7">
+{#                    {{ form.content }}#}
+                    <script type="text/plain" id="content" name="content"></script>
+                </div>
+                <div class="col-md-3">
+                    {% for error in form.content.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+        </div>
+
+        <div class="form-group {% if form.types.errors %} has-error {% endif %}">
+                <label class="control-label col-md-2">
+                    {{ form.types.label }}
+                </label>
+                <div class="col-md-7">
+                    {{ form.types }}
+                </div>
+                <div class="col-md-3">
+                    {% for error in form.types.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+        </div>
+
+        <div class="form-group {% if form.img_url.errors %} has-error {% endif %}">
+                <label class="control-label col-md-2">
+                    {{ form.img_url.label }}
+                </label>
+                <div class="col-md-7">
+                    {{ form.img_url }}
+                </div>
+                <div class="col-md-3">
+                    {% for error in form.img_url.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+        </div>
+
+        <div class="form-group {% if form.author.errors %} has-error {% endif %}">
+                <label class="control-label col-md-2">
+                    {{ form.author.label }}
+                </label>
+                <div class="col-md-7">
+                    {{ form.author }}
+                </div>
+                <div class="col-md-3">
+                    {% for error in form.author.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+        </div>
+
+        <div class="form-group {% if form.view_count.errors %} has-error {% endif %}">
+                <label class="control-label col-md-2">
+                    {{ form.view_count.label }}
+                </label>
+                <div class="col-md-7">
+                    {{ form.view_count }}
+                </div>
+                <div class="col-md-3">
+                {% for error in form.view_count.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+                </div>
+        </div>
+
+        <div class="form-group {% if form.created_at.errors %} has-error {% endif %}">
+                <label class="control-label col-md-2">
+                    {{ form.created_at.label }}
+                </label>
+                <div class="col-md-7">
+                    {{ form.created_at }}
+                </div>
+                <div class="col-md-3">
+                    {% for error in form.created_at.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+        </div>
+
+        <div class="form-group">
+                <label class="control-label col-md-2">
+                    {{ form.is_valid.label }}
+                </label>
+                <div class="col-md-4">
+                    {{ form.is_valid }}
+                </div>
+        </div>
+
+        <div class="form-group">
+                <label class="control-label col-md-2">
+                    {{ form.is_recommend.label }}
+                </label>
+                <div class="col-md-7">
+                    {{ form.is_recommend }}
+                </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4 col-md-offset-2">
+                {{ form.csrf_token }}
+                {{ form.submit }}
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block otherjs %}
+    <script src="{{ url_for('static', filename='ueditor/ueditor.config.js') }}"></script>
+    <script src="{{ url_for('static', filename='ueditor/ueditor.all.js') }}"></script>
+    <script>
+        let ue = UE.getEditor('content',{
+
+        })
+    </script>
+{% endblock %}

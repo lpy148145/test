@@ -1,0 +1,18 @@
+{% extends 'home/home_base.html' %}
+{% block head %}
+<title>新闻详情页</title>
+{% endblock %}
+{% block content %}
+    {% for news_obj in news_list %}
+        <div class="container-fluid">
+            <div class="row">
+                <h2>{{ news_obj.title }}</h2>
+                <p>
+                    {{ news_obj.created_at }}
+                    <strong>来源：</strong>{{ news_obj.author }}
+                </p>
+                <p>{{ news_obj.content | safe }}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

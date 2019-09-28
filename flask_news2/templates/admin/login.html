@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台登录</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-login.css') }}">
+</head>
+<body>
+    <div class="container">
+        <form action="{{ url_for('admin.login') }}", method="post">
+            {% with messages = get_flashed_messages(with_categories = true) %}
+                {% for category, message in messages %}
+                    <div class="row col-md-4 col-md-offset-4 form-group">
+                        <div class="alert {% if category=='error' %} alert-danger {% else %} alert-success {% endif %}
+                        alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;
+                                </span>
+                            </button>
+                            <strong>提示:</strong>{{ message }}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endwith %}
+            <div class="row col-md-4 col-md-offset-4 form-group">
+                <h2 class="text-center">新闻管理系统后台</h2>
+            </div>
+            <div class="row col-md-4 col-md-offset-4 form-group">
+                <input type="text" class="form-control input-lg" placeholder="Username" name="username" required>
+            </div>
+            <div class="row col-md-4 col-md-offset-4 form-group">
+                <input type="password" class="form-control input-lg" placeholder="Password" name="password" required>
+            </div>
+            <div class="row col-md-4 col-md-offset-4 form-group">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">登录</button>
+            </div>
+        </form>
+    </div>
+</body>
+    <script src="{{ url_for('static', filename='js/jquery.1.10.2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
+</html>

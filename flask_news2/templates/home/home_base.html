@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>新闻展示</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css', _external=True) }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css', _external=True) }}">
+    </head>
+    <body>
+        <div class="container">
+                    <ul class="nav nav-pills" id="j_btn">
+                        <li ><a href="{{ url_for('.home') }}">首页</a></li>
+                        <li ><a href="#">推荐</a></li>
+                        <li class="active"><a href="{{ url_for('.cat', name='科技') }}">科技</a></li>
+                        <li><a href="{{ url_for('.cat', name='国内') }}">国内</a></li>
+                        <li><a href="{{ url_for('.cat', name='军事') }}">军事</a></li>
+                        <li><a href="{{ url_for('.cat', name='体育') }}">体育</a></li>
+                        <li><a href="{{ url_for('.cat', name='娱乐') }}">娱乐</a></li>
+                    </ul>
+            <article>
+                {%block content %}
+                {% endblock %}
+            </article>
+
+        </div>
+    </body>
+    <script>
+        let  oUl = document.getElementById("j_btn");
+        let btn = oUl.getElementsByTagName("li");
+
+        for(let i=0; i< btn.length; ++i)
+        {
+           btn[i].onclick = function () {
+               for (let i=0; i<btn.length; ++i){
+                   btn[i].className = "";
+
+               }
+               this.className = "active";
+           }
+        }
+    </script>
+    {% block otherjs %}
+    {% endblock %}
+</html>
